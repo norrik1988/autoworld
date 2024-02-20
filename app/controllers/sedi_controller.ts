@@ -4,7 +4,7 @@ import Sede from "#models/Sede";
 import Sedi from "#models/Sede";
 import { HttpContext } from "@adonisjs/core/http";
 import { createPostValidator } from "#validators/validators"; 
-import { errorMessages } from "#validators/messages";
+
 
 export default class SediController {
 
@@ -30,7 +30,9 @@ export default class SediController {
 
    async createSedi({request}:HttpContext) {
 
-      await createPostValidator.validate(request.all(), { messagesProvider:errorMessages })
+      // await createPostValidator.validate(request.all(), { messagesProvider:errorMessages })
+
+      await request.validateUsing( createPostValidator)
 
      const post = await Sede.create({
       nome: request.input('nome'),

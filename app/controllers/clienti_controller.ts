@@ -3,7 +3,6 @@
 import Cliente from "#models/Cliente";
 import { createPostValidatorClienti } from "#validators/validators";
 import { HttpContext } from "@adonisjs/core/http";
-import { errorMessages } from "#validators/messages";
 
 export default class ClientiController {
 
@@ -32,7 +31,9 @@ export default class ClientiController {
 
         async createClienti ({request}:HttpContext){
 
-            await createPostValidatorClienti.validate(request.all(), { messagesProvider:errorMessages })
+            // await createPostValidatorClienti.validate(request.all(), { messagesProvider:errorMessages })
+
+            await request.validateUsing( createPostValidatorClienti)
 
             
     

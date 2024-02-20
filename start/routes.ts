@@ -35,7 +35,7 @@ router.get('/marche', [MarcheController, 'marcheAll'])
 
 router.get('/vetture', [VettureController, 'vettureAll'])
 
-router.post('/CreateVetture', [VettureController, 'CreateVetture'])
+router.post('/CreateVetture', [VettureController, 'createVetture'])
 
 
 router.get('/clienti', [ClientiController, 'clientiAll'])

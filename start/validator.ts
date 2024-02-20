@@ -1,4 +1,4 @@
-import vine, { SimpleMessagesProvider } from '@vinejs/vine'
+import  { SimpleMessagesProvider } from '@vinejs/vine'
 
 export const  errorMessages= new SimpleMessagesProvider({
   // Applicable for all fields

@@ -1,7 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Vetture from "#models/Vettura";
 import {  createPostValidatorVetture } from '#validators/validators';
-import { errorMessages } from '#validators/messages';
+
 
 export default class VettureController {
     async vettureAll (){
@@ -10,9 +10,11 @@ export default class VettureController {
         return vetture
         }
 
-    async CreateVetture({request}:HttpContext) {
+    async createVetture({request}:HttpContext) {
 
-            await createPostValidatorVetture.validate(request.all(), { messagesProvider:errorMessages })
+            // await createPostValidatorVetture.validate(request.all(), { messagesProvider:errorMessages })
+
+            await request.validateUsing( createPostValidatorVetture)
 
 
             const post = await Vetture.create({

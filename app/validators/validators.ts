@@ -1,5 +1,5 @@
 
-import vine from "@vinejs/vine";
+import vine, { SimpleMessagesProvider } from "@vinejs/vine";
 
 // import { SimpleMessagesProvider } from "@vinejs/vine"
 
@@ -58,6 +58,7 @@ export const createPostValidator = vine.compile(
     }
   )
 )
+
 
 
 

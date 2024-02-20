@@ -3,7 +3,7 @@
 import Ordini from "#models/Ordine";
 import { HttpContext } from "@adonisjs/core/http";
 import { createPostValidatorOrdini } from "#validators/validators";
-import { errorMessages } from "#validators/messages";
+
 
 export default class OrdiniController {
 
@@ -17,7 +17,9 @@ export default class OrdiniController {
     
         async createOrdini({request}:HttpContext) {
 
-            await createPostValidatorOrdini.validate(request.all(), { messagesProvider:errorMessages })
+            // await createPostValidatorOrdini.validate(request.all(), { messagesProvider:errorMessages })
+
+            await request.validateUsing( createPostValidatorOrdini)
 
             const post = await Ordini.create({
              cliente_id: request.input('cliente_id'),
