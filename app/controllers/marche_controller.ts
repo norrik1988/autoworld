@@ -1,7 +1,6 @@
 // import type { HttpContext } from '@adonisjs/core/http'
 
 import Marche from "#models/Marca";
-import { errorMessages } from "#validators/messages";
 import { createPostValidatorMarche } from "#validators/validators";
 import { HttpContext } from "@adonisjs/core/http";
 
@@ -16,7 +15,7 @@ export default class MarcheController {
 
     async createMarche ({request}:HttpContext){
 
-        await createPostValidatorMarche.validate(request.all(), { messagesProvider:errorMessages })
+        await request.validateUsing( createPostValidatorMarche)
 
         const marche = await Marche.create(
             {
