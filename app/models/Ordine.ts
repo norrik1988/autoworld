@@ -1,6 +1,7 @@
 import { BaseModel, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
 import Vetture from './Vettura.js'
 import type { HasOne } from '@adonisjs/lucid/types/relations'
+import { DateTime } from 'luxon'
 
 export default class Ordini extends BaseModel {
 
@@ -16,10 +17,10 @@ export default class Ordini extends BaseModel {
   declare  vettura_id: number
 
   @column()
-  declare  data_ordine: Date
+  declare  data_ordine: DateTime
 
   @column()
-  declare  data_consegna: Date
+  declare  data_consegna: DateTime|null
 
   @column()
   declare  importo_vendita: Number
@@ -31,5 +32,6 @@ export default class Ordini extends BaseModel {
 
 
   declare vetture: HasOne<typeof Vetture> 
+    
  
 }

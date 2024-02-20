@@ -1,8 +1,12 @@
 // import type { HttpContext } from '@adonisjs/core/http'
 
 import Cliente from "#models/Cliente";
+import Ordine from "#models/Ordine";
 import { createPostValidatorClienti } from "#validators/validators";
 import { HttpContext } from "@adonisjs/core/http";
+import db from '@adonisjs/lucid/services/db'
+import { DateTime } from "luxon";
+
 
 // import { validator } from "/start/validator" 
 
@@ -35,12 +39,12 @@ export default class ClientiController {
 
             // await createPostValidatorClienti.validate(request.all(), { messagesProvider:errorMessages })
 
-            await request.validateUsing( createPostValidatorClienti) 
+            const clienteValidato = await request.validateUsing( createPostValidatorClienti) 
             const clienti = await Cliente.create(
                 {
-                    nome: request.input('nome'),
-                    cognome: request.input('cognome'),
-                    codice_fiscale: request.input('codice_fiscale')
+                    nome: clienteValidato.nome,
+                    cognome: clienteValidato.cognome,
+                    codice_fiscale: clienteValidato.codice_fiscale
                     
                 }
             );
@@ -48,8 +52,28 @@ export default class ClientiController {
             return clienti
             }
 
+
+       async createClientiOrdineNuovoDb({request}:HttpContext) { 
+                    await db.transaction( async (trx) => {
+                    const cliente = new Cliente()
+                    cliente.nome = 'Luigi'
+                    cliente.cognome = 'Cosentino'
+                    cliente.codice_fiscale = 'LGCCDN66J88K789K'
+                    await cliente.useTransaction(trx).save()
+                    // throw new Error("err");
+                    const ordine = new Ordine()
+                    ordine.cliente_id = cliente.id
+                    ordine.vettura_id = request.input ('macchina selezionata')
+                    ordine.data_ordine  = DateTime.now ()
+                    ordine.data_consegna = null
+                    await ordine.useTransaction(trx).save()
+
+                    
+
+        }) 
+           
         }
 
-       
+    }
     
 

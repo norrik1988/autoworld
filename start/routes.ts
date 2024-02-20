@@ -41,6 +41,7 @@ router.post('/CreateVetture', [VettureController, 'createVetture'])
 router.get('/clienti', [ClientiController, 'clientiAll'])
 
 router.post('/createClienti', [ClientiController, 'createClienti'])
+router.post('/createClientiDb', [ClientiController, 'createClientiOrdineNuovoDb'])
 
 router.get('/ordini', [OrdiniController, 'ordiniAll'])
 
