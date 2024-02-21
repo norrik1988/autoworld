@@ -68,11 +68,45 @@ export default class ClientiController {
         return modCliente
     }
 
+    async deleteCliente ({params}: HttpContext) {
+
+        const cliente = await Cliente.findOrFail(params.id);
+        await cliente.delete();
+
+        return cliente
+
+    }
+
+    //query builder
+
     async getClientiAllQB() {    
         const queryWithTableSelection = db.from('clienti')
         console.log(queryWithTableSelection)
         return queryWithTableSelection
     }
+
+    
+    async createClienteQB() {
+        const cliente = await db
+        .table('clienti')
+        .returning(['id', 'nome', 'cognome'])
+        .insert({
+            nome: 'Alessandro',
+            cognome: 'Riccio',
+            codice_fiscale: 'LSSRCC77K88K999L',
+        })        
+        return cliente
+
+                    }
+
+        
+    async patchClienteQB() {
+
+        
+    }
+
+
+    //raw query
 
     async getClientiAllRQ() {
         const clientiQR = await db.rawQuery('select * from clienti')
@@ -90,19 +124,6 @@ export default class ClientiController {
 
           // SELECT * FROM "users" WHERE "id" = 1
     }
-
-    async createClienteQB() {
-                const cliente = await db
-                .table('clienti')
-                .returning(['id', 'nome', 'cognome'])
-                .insert({
-                    nome: 'Alessandro',
-                    cognome: 'Riccio',
-                    codice_fiscale: 'LSSRCC77K88K999L',
-                })        
-                return cliente
-
-                            }
 
 
     async createClienteRQ() {

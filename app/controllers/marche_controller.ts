@@ -25,4 +25,20 @@ export default class MarcheController {
      
         return marche
         }
+
+    async patchMarche({request, params}: HttpContext) {
+            const modMarche = await Marche.findOrFail(params.id)
+            modMarche.nome = request.input('nome')
+            await modMarche.save()
+            return modMarche
+        }
+
+    async deleteMarche ({params}: HttpContext) {
+
+        const cliente = await Marche.findOrFail(params.id);
+        await cliente.delete();
+    
+        return cliente
+    
+        }
 }

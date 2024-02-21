@@ -39,4 +39,13 @@ export default class OrdiniController {
             return ordine
         }
 
+        async deleteOrdini ({params}: HttpContext) {
+
+            const cliente = await Ordini.findOrFail(params.id);
+            await cliente.delete();
+        
+            return cliente
+        
+            }
+
 }

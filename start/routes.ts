@@ -40,6 +40,12 @@ router.group (()=> {
             router.post('/createOrdini', [OrdiniController, 'createOrdini']) })
 
             router.patch('/patchClienti', [ClientiController, 'patchClienti'])
+
+            router.patch('/patchMarche/:id', [MarcheController, 'patchMarche'])
+
+            router.delete('/deleteCliente/:id', [ClientiController, 'deleteCliente'])
+
+            router.delete('/deleteMarche/:id', [MarcheController, 'deleteMarche'])
             
             .prefix('orm')
 

@@ -78,19 +78,26 @@ export default class SediController {
 
    async incassoSede() { 
       
-      const res = await db.from((subquery) => {
-                           subquery
+      const res = await db
                               .from('ordini')
+                              .select ('sede_id')
                               .sum('importo_vendita')
                               .groupBy('sede_id')
                               .as('incassi_totale')
-                        })
+                        
       
      return res
   
 }
 
-// da completare 
+   async deleteSedi ({params}: HttpContext) {
+
+            const sede = await Sedi.findOrFail(params.id);
+            await sede.delete();
+
+            return sede
+
+            }
 
 
 }

@@ -40,5 +40,15 @@ export default class VettureController {
         
         return vetture
     }
+
+    async deleteVetture ({params}: HttpContext) {
+
+        const sede = await Vetture.findOrFail(params.id);
+        await sede.delete();
+
+        return sede
+
+        }
+
 }
 
