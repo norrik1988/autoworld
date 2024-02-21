@@ -38,15 +38,17 @@ router.group (()=> {
             router.get('/ordini', [OrdiniController, 'ordiniAll'])
 
             router.post('/createOrdini', [OrdiniController, 'createOrdini']) })
+
+            router.patch('/patchClienti', [ClientiController, 'patchClienti'])
             
             .prefix('orm')
 
-
-
 router.group (()=> {
-            router.get('/getClientiAllQR', [ClientiController, 'getClientiAllQR'])
+            router.get('/getClientiAllQB', [ClientiController, 'getClientiAllQB'])
 
             router.get('/incassoSede', [SediController, 'incassoSede'])
+
+            router.post('/createClienteQB', [ClientiController, 'createClienteQB'])
                 }).prefix('qb')
 
 router.group (()=> {
@@ -57,5 +59,7 @@ router.group (()=> {
             router.get('/FindOrdineByIdRQ', [OrdiniController, 'FindOrdineByIdRQ'])
 
             router.get('vettureComparision', [VettureController, 'vettureComparision'])
+
+            router.post('/createClienteRQ', [ClientiController, 'createClienteRQ'])
             
                 }).prefix('rq')

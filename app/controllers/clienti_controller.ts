@@ -60,7 +60,15 @@ export default class ClientiController {
            
         }
 
-    async getClientiAllQR() {    
+    async patchClienti({request}: HttpContext) {
+        const modCliente = await Cliente.findOrFail(request.input('id'))
+        modCliente.nome = request.input('nome')
+        modCliente.cognome = request.input('cognome')
+        await modCliente.save()
+        return modCliente
+    }
+
+    async getClientiAllQB() {    
         const queryWithTableSelection = db.from('clienti')
         console.log(queryWithTableSelection)
         return queryWithTableSelection
@@ -83,7 +91,28 @@ export default class ClientiController {
           // SELECT * FROM "users" WHERE "id" = 1
     }
 
-    
+    async createClienteQB() {
+                const cliente = await db
+                .table('clienti')
+                .returning(['id', 'nome', 'cognome'])
+                .insert({
+                    nome: 'Alessandro',
+                    cognome: 'Riccio',
+                    codice_fiscale: 'LSSRCC77K88K999L',
+                })        
+                return cliente
+
+                            }
+
+
+    async createClienteRQ() {
+        const cliente = await db.rawQuery(
+            'INSERT INTO clienti (nome, cognome, codice_fiscale) VALUES (?, ?, ?)',
+            ['Walter', 'Ricci', 'WLTRCC57K56K445L']
+          );
+
+        return cliente
+    }                        
 
     }
     
