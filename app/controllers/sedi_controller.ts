@@ -4,6 +4,7 @@ import Sede from "#models/Sede";
 import Sedi from "#models/Sede";
 import { HttpContext } from "@adonisjs/core/http";
 import { createPostValidator } from "#validators/validators"; 
+import db from "@adonisjs/lucid/services/db";
 
 
 export default class SediController {
@@ -74,6 +75,16 @@ export default class SediController {
       return modSede
    
    }
+
+   async incassoSede() { db.from((subquery) => {
+    subquery
+      .from('ordini')
+      .sum('importo_vendita')
+      .groupBy('user_id')
+      .as('total_marks')
+  })
+  .avg('total_marks.total')
+}
 
 
 }

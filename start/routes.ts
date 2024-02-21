@@ -49,4 +49,11 @@ router.group (()=> {
 
 router.group (()=> {
             router.get('/getClientiAllRQ', [ClientiController, 'getClientiAllRQ'])
+
+            router.get('/findClienteByIdRQ', [ClientiController, 'findClienteByIdRQ'])
+            
+            router.get('/FindOrdineByIdRQ', [OrdiniController, 'FindOrdineByIdRQ'])
+
+            router.get('vettureComparision', [VettureController, 'vettureComparision'])
+            
                 }).prefix('rq')

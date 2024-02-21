@@ -27,7 +27,6 @@ export default class Vetture extends BaseModel {
     localKey: 'id',
     foreignKey: 'sede_id'
   } )
-
   
   declare sede:BelongsTo<typeof Sedi>
 }

@@ -3,6 +3,7 @@
 import Ordini from "#models/Ordine";
 import { HttpContext } from "@adonisjs/core/http";
 import { createPostValidatorOrdini } from "#validators/validators";
+import db from "@adonisjs/lucid/services/db";
 
 
 export default class OrdiniController {
@@ -30,6 +31,12 @@ export default class OrdiniController {
            
             return post
           }
+        
+        async FindOrdineByIdRQ() {
+            const ordine = db.rawQuery ('select * from ordini where ?? = ?',
+            ['ordini.cliente_id', 1] )
 
+            return ordine
+        }
 
 }

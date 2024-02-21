@@ -41,9 +41,9 @@ export default class ClientiController {
     async createClientiOrdineNuovoDb({request}:HttpContext) { 
                     await db.transaction( async (trx) => {
                     const cliente = new Cliente()
-                    cliente.nome = 'Luigi'
-                    cliente.cognome = 'Cosentino'
-                    cliente.codice_fiscale = 'LGCCDN66J88K789K'
+                    cliente.nome = 'Alessandro'
+                    cliente.cognome = 'Allegro'
+                    cliente.codice_fiscale = 'LSSLLG56H78J996K'
                     await cliente.useTransaction(trx).save()
                     // throw new Error("err");
                     const ordine = new Ordine()
@@ -53,7 +53,8 @@ export default class ClientiController {
                     ordine.data_consegna = null
                     await ordine.useTransaction(trx).save()
 
-                    
+                    //aggiornata stato venduto o meno
+                    await ordine.related('vetture').query().update({venduta: true})
 
         }) 
            
@@ -72,8 +73,17 @@ export default class ClientiController {
     }
 
     async findClienteByIdRQ() {
-        
+        const clienteID = await db.rawQuery(
+            'select * from clienti where id = ?',
+            [6]
+          )
+          
+        return clienteID
+
+          // SELECT * FROM "users" WHERE "id" = 1
     }
+
+    
 
     }
     

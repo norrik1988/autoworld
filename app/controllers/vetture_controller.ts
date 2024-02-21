@@ -1,6 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Vetture from "#models/Vettura";
 import {  createPostValidatorVetture } from '#validators/validators';
+import db from '@adonisjs/lucid/services/db';
 
 
 export default class VettureController {
@@ -27,5 +28,17 @@ export default class VettureController {
            
             return post
           }
+    
+    async vettureComparision() {
+        const vetture = db.rawQuery(
+            'select * from vetture inner join sedi on :column1: = :column2:',
+            {
+              column1: 'vetture.sede_id',
+              column2: 'sedi.id',
+            }
+          )
+        
+        return vetture
+    }
 }
 
