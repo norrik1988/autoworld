@@ -8,7 +8,7 @@ import db from '@adonisjs/lucid/services/db'
 import { DateTime } from "luxon";
 
 
-// import { validator } from "/start/validator" 
+
 
 export default class ClientiController {
 
@@ -19,23 +19,8 @@ export default class ClientiController {
         }
 
 
-    // async createClienti ({request}:HttpContext){
 
-    //     await createPostValidatorClienti.validate(request.all(), { messagesProvider:errorMessages })
-
-    //     const clienti = await Cliente.create(
-    //         {
-    //             nome: request.input('nome'),
-    //             cognome: request.input('cognome'),
-    //             codice_fiscale: request.input('codice_fiscale')
-                
-    //         }
-    //     );
-     
-    //     return clienti
-    //     }
-
-        async createClienti ({request}:HttpContext){
+    async createClienti ({request}:HttpContext){
 
             // await createPostValidatorClienti.validate(request.all(), { messagesProvider:errorMessages })
 
@@ -53,7 +38,7 @@ export default class ClientiController {
             }
 
 
-       async createClientiOrdineNuovoDb({request}:HttpContext) { 
+    async createClientiOrdineNuovoDb({request}:HttpContext) { 
                     await db.transaction( async (trx) => {
                     const cliente = new Cliente()
                     cliente.nome = 'Luigi'
@@ -73,6 +58,22 @@ export default class ClientiController {
         }) 
            
         }
+
+    async getClientiAllQR() {    
+        const queryWithTableSelection = db.from('clienti')
+        console.log(queryWithTableSelection)
+        return queryWithTableSelection
+    }
+
+    async getClientiAllRQ() {
+        const clientiQR = await db.rawQuery('select * from clienti')
+        return clientiQR
+
+    }
+
+    async findClienteByIdRQ() {
+        
+    }
 
     }
     

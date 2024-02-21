@@ -1,5 +1,7 @@
 
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import Ordini from './Ordine.js'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
 
 export default class Cliente extends BaseModel {
 
@@ -17,4 +19,10 @@ export default class Cliente extends BaseModel {
   @column()
   declare codice_fiscale: string
 
+  @hasMany(() => Ordini, {
+    localKey: 'id',
+    foreignKey: 'cliente_id'
+  })
+
+  declare Ordini: HasMany<typeof Ordini>
 }

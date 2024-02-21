@@ -1,7 +1,8 @@
-import { BaseModel, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column,  hasOne } from '@adonisjs/lucid/orm'
 import Vetture from './Vettura.js'
-import type { HasOne } from '@adonisjs/lucid/types/relations'
+import type { BelongsTo, HasMany, HasOne } from '@adonisjs/lucid/types/relations'
 import { DateTime } from 'luxon'
+import Cliente from './Cliente.js'
 
 export default class Ordini extends BaseModel {
 
@@ -29,9 +30,15 @@ export default class Ordini extends BaseModel {
     localKey: 'vettura_id',
     foreignKey: 'id'
   })
+  
+  declare vetture: HasOne<typeof Vetture>
+  
+  @belongsTo(() => Cliente, {
+    localKey: 'id',
+    foreignKey: 'cliente_id'
+  })
 
-
-  declare vetture: HasOne<typeof Vetture> 
+  declare cliente: BelongsTo<typeof Cliente> 
     
  
 }

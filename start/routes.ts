@@ -13,41 +13,40 @@ import SediController from '#controllers/sedi_controller'
 import VettureController from '#controllers/vetture_controller'
 import router from '@adonisjs/core/services/router'
 
-router.get('/sedi', [SediController, 'sediAll'])
+router.group (()=> {
+    
+            router.get('/sedi', [SediController, 'sediAll'])
 
-// router.patch('/sedi', [SediController, 'updateSedi'])
+            router.post('/createSedi', [SediController, 'createSedi'])
 
-// router.post('/nuovaSede', [SediController, 'sediNew'])
+            router.patch('/modificaSede', [SediController, 'modificaSede'])
 
-// router.post('/nuoveSedi', [SediController, 'sediNew2'])
+            router.patch('/updateSedeBy/:id', [SediController, 'updateSedeById'])
 
-router.post('/createSedi', [SediController, 'createSedi'])
+            router.get('/marche', [MarcheController, 'marcheAll'])
 
-router.patch('/modificaSede', [SediController, 'modificaSede'])
+            router.get('/vetture', [VettureController, 'vettureAll'])
 
-router.patch('/updateSedeBy/:id', [SediController, 'updateSedeById'])
+            router.post('/CreateVetture', [VettureController, 'createVetture'])
 
+            router.get('/clienti', [ClientiController, 'clientiAll'])
 
+            router.post('/createClienti', [ClientiController, 'createClienti'])
 
-// router.get('/sedi2', [SediController, 'sediAll2'])
+            router.post('/createClientiDb', [ClientiController, 'createClientiOrdineNuovoDb'])
 
-router.get('/marche', [MarcheController, 'marcheAll'])
+            router.get('/ordini', [OrdiniController, 'ordiniAll'])
 
-router.get('/vetture', [VettureController, 'vettureAll'])
-
-router.post('/CreateVetture', [VettureController, 'createVetture'])
-
-
-router.get('/clienti', [ClientiController, 'clientiAll'])
-
-router.post('/createClienti', [ClientiController, 'createClienti'])
-router.post('/createClientiDb', [ClientiController, 'createClientiOrdineNuovoDb'])
-
-router.get('/ordini', [OrdiniController, 'ordiniAll'])
-
-router.post('/createOrdini', [OrdiniController, 'createOrdini'])
-
-// router.patch('/ordini', [OrdiniController, 'modificaOrdine'])
+            router.post('/createOrdini', [OrdiniController, 'createOrdini']) })
+            
+            .prefix('orm')
 
 
 
+router.group (()=> {
+            router.get('/getClientiAllQR', [ClientiController, 'getClientiAllQR'])
+                }).prefix('qb')
+
+router.group (()=> {
+            router.get('/getClientiAllRQ', [ClientiController, 'getClientiAllRQ'])
+                }).prefix('rq')
