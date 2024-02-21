@@ -76,17 +76,20 @@ export default class SediController {
    
    }
 
-   async incassoSede() { db.from((subquery) => {
-    subquery
-      .from('ordini')
-      .sum('importo_vendita')
-      .groupBy('user_id')
-      .as('total_marks')
-  })
-  .avg('total_marks.total')
+   async incassoSede() { 
+      
+      const res = await db.from((subquery) => {
+                           subquery
+                              .from('ordini')
+                              .sum('importo_vendita')
+                              .groupBy('sede_id')
+                              .as('incassi_totale')
+                        })
+      
+      
+     return res
+  
 }
-
-
 }
 
 

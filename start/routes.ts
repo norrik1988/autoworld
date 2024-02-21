@@ -45,6 +45,8 @@ router.group (()=> {
 
 router.group (()=> {
             router.get('/getClientiAllQR', [ClientiController, 'getClientiAllQR'])
+
+            router.get('/incassoSede', [SediController, 'incassoSede'])
                 }).prefix('qb')
 
 router.group (()=> {
