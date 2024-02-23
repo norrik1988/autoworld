@@ -37,7 +37,7 @@ router.group (()=> {
 
             router.get('/ordini', [OrdiniController, 'ordiniAll'])
 
-            router.post('/createOrdini', [OrdiniController, 'createOrdini']) })
+            router.post('/createOrdini', [OrdiniController, 'createOrdini']) 
 
             router.patch('/patchClienti', [ClientiController, 'patchClienti'])
 
@@ -47,7 +47,7 @@ router.group (()=> {
 
             router.delete('/deleteMarche/:id', [MarcheController, 'deleteMarche'])
             
-            .prefix('orm')
+                        }).prefix('orm')
 
 router.group (()=> {
             router.get('/getClientiAllQB', [ClientiController, 'getClientiAllQB'])
@@ -55,6 +55,12 @@ router.group (()=> {
             router.get('/incassoSede', [SediController, 'incassoSede'])
 
             router.post('/createClienteQB', [ClientiController, 'createClienteQB'])
+            
+            router.delete('/deleteMarcheQB/:id', [MarcheController, 'deleteMarcheQB'])
+
+            router.patch('/patchClienteQB/:id', [ClientiController, 'patchClienteQB'] )
+
+           
                 }).prefix('qb')
 
 router.group (()=> {
@@ -67,5 +73,7 @@ router.group (()=> {
             router.get('vettureComparision', [VettureController, 'vettureComparision'])
 
             router.post('/createClienteRQ', [ClientiController, 'createClienteRQ'])
+
+            router.delete('/deleteMarcheRQ', [MarcheController, 'deleteMarcheRQ'])
             
                 }).prefix('rq')

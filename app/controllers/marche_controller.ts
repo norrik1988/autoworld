@@ -3,6 +3,7 @@
 import Marche from "#models/Marca";
 import { createPostValidatorMarche } from "#validators/validators";
 import { HttpContext } from "@adonisjs/core/http";
+import db from "@adonisjs/lucid/services/db";
 
 export default class MarcheController {
 
@@ -41,4 +42,25 @@ export default class MarcheController {
         return cliente
     
         }
+
+    //qb
+    
+    async deleteMarcheQB ({params}: HttpContext) {
+
+        const marche = db
+        .from('marche')
+        .where('id', params.id)
+        .delete()
+
+        return marche
+        
+    }
+
+     //rq
+
+     async deleteMarcheRQ () {
+        const marche = await db.rawQuery ('DELETE FROM marche WHERE id = ?', [7])
+
+        return marche
+     }
 }

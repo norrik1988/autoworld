@@ -100,9 +100,16 @@ export default class ClientiController {
                     }
 
         
-    async patchClienteQB() {
+    async patchClienteQB({params}: HttpContext) {
 
-        
+        const cliente = await db
+            .from('clienti')
+            .where('id', params.id)
+
+            .update({ nome: 'gennaro0', cognome: 'esposito', codice_fiscale: 'GNRSPS45P33K678L'}
+                    )
+
+        return cliente
     }
 
 
